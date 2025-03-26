@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluetooth Protocol SDK Application - Optimized Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@latest/font/lucide.min.css">
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+        .dark-glass-effect {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+        .phone-mockup {
+            width: 375px;
+            height: 812px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            margin: 20px;
+        }
+        .signal-bar {
+            width: 3px;
+            border-radius: 1px;
+            margin-right: 1px;
+        }
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 40px 0 20px;
+            color: #1e40af;
+            text-align: center;
+            width: 100%;
+        }
+        body {
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .toggle-slider {
+            background-color: #15803d;
+        }
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        .device-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text-3xl font-bold text-center text-blue-800 my-6">Bluetooth Protocol SDK Application Interface Design</h1>
+    
+    <div class="container">
+        <!-- 设备扫描页面 -->
+        <div class="phone-mockup bg-gray-50">
+            <div class="h-full flex flex-col">
+                <!-- 状态栏 -->
+                <div class="h-10 bg-slate-800 flex items-center justify-between px-6">
+                    <div class="text-white text-xs">9:41</div>
+                    <div class="flex space-x-2">
+                        <i class="icon-wifi text-white text-xs"></i>
+                        <i class="icon-battery text-white text-xs"></i>
+                    </div>
+                </div>
+                
+                <!-- 头部 -->
+                <div class="p-4 flex items-center border-b border-gray-200">
+                    <button class="p-2">
+                        <i class="icon-arrow-left text-gray-700"></i>
+                    </button>
+                    <h1 class="text-xl font-semibold text-center flex-1 text-gray-800">Bluetooth Device Scanning</h1>
+                </div>
+                
+                <!-- 内容区域 -->
+                <div class="flex-1 overflow-auto p-4 bg-gray-50">
+                    <!-- 新发现的设备 -->
+                    <div>
+                    
+                        <!-- 搜索框 -->
+                        <div class="relative mb-4">
+                            <input type="text" placeholder="Enter device name to filter" class="w-full p-3 pl-10 rounded-xl border border-gray-200 bg-white text-gray-700 text-sm" />
+                            <i class="icon-search absolute left-3 top-3 text-gray-400"></i>
+                        </div>
+                    
+                        <div class="flex justify-between items-center mb-3">
+                            <h2 class="text-base font-semibold text-gray-700">New Devices</h2>
+                            <div class="flex items-center text-xs text-green-700">
+                                <div class="w-2 h-2 rounded-full bg-green-700 animate-pulse mr-1"></div>
+                                Scanning...
+                            </div>
+                        </div>
+
+                        <!-- 设备项 1 -->
+                        <div class="glass-effect rounded-xl p-3 mb-3 flex items-center">
+                            <div class="device-icon bg-green-700 mr-3">
+                                <i class="icon-headphones text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-medium text-gray-800">Sony WH-1000XM4</h3>
+                                    <div class="flex items-center">
+                                        <div class="flex h-4 items-end mr-2">
+                                            <div class="signal-bar h-1 bg-green-400"></div>
+                                            <div class="signal-bar h-2 bg-green-500"></div>
+                                            <div class="signal-bar h-3 bg-green-600"></div>
+                                            <div class="signal-bar h-4 bg-green-700"></div>
+                                        </div>
+                                        <span class="text-xs font-medium text-green-700">-45 dBm</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between mt-1">
+                                    <span class="text-xs text-gray-500">MAC: 00:1B:44:33:3A:B9</span>
+                                    <button class="px-4 py-1 bg-green-700 text-white text-xs rounded-full shadow-sm">Connect</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 设备项 2 -->
+                        <div class="glass-effect rounded-xl p-3 mb-3 flex items-center">
+                            <div class="device-icon bg-green-100 mr-3">
+                                <i class="icon-speaker text-green-700"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-medium text-gray-800">JBL Flip 6</h3>
+                                    <div class="flex items-center">
+                                        <div class="flex h-4 items-end mr-2">
+                                            <div class="signal-bar h-1 bg-green-400"></div>
+                                            <div class="signal-bar h-2 bg-green-500"></div>
+                                            <div class="signal-bar h-3 bg-gray-300"></div>
+                                            <div class="signal-bar h-4 bg-gray-300"></div>
+                                        </div>
+                                        <span class="text-xs font-medium text-green-700">-75 dBm</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between mt-1">
+                                    <span class="text-xs text-gray-500">MAC: 00:1B:44:44:3A:BA</span>
+                                    <button class="px-4 py-1 bg-green-700 text-white text-xs rounded-full shadow-sm">Connect</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部按钮 -->
+                <div class="p-4 border-t border-gray-200">
+                    <button class="w-full py-3 bg-green-700 text-white font-medium rounded-xl shadow-lg flex items-center justify-center">
+                        Start Scanning
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 命令配置页面 -->
+        <div class="phone-mockup bg-gray-50">
+            <div class="h-full flex flex-col">
+                <!-- 状态栏 -->
+                <div class="h-10 bg-slate-800 flex items-center justify-between px-6">
+                    <div class="text-white text-xs">9:41</div>
+                    <div class="flex space-x-2">
+                        <i class="icon-wifi text-white text-xs"></i>
+                        <i class="icon-battery text-white text-xs"></i>
+                    </div>
+                </div>
+                
+                <!-- 头部 -->
+                <div class="p-4 flex items-center justify-between border-b border-gray-200">
+                    <div class="flex items-center">
+                        <div class="w-2 h-2 rounded-full bg-red-500 mr-1"></div>
+                        <span class="text-sm text-gray-700">Not Connected</span>
+                    </div>
+                    <button class="px-4 py-2 bg-green-700 text-white text-sm rounded-full shadow-sm">
+                        Connect Device
+                    </button>
+                </div>
+                
+                <!-- 内容区域 -->
+                <div class="flex-1 overflow-auto p-4 bg-gray-50">
+                    <!-- 编解码信息 -->
+                    <div class="glass-effect rounded-xl mb-4 overflow-hidden bg-gray-100">
+                        <div class="flex justify-between items-center p-3 border-b border-gray-100">
+                            <h2 class="text-base font-semibold text-gray-800">Codec Information</h2>
+                            <button class="text-gray-400">
+                                <i class="icon-chevron-up"></i>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="mb-4">
+                                <label class="block text-sm text-gray-600 mb-1">Client ID</label>
+                                <input type="text" value="8601" class="w-full p-3 rounded-lg border border-gray-200 bg-white text-gray-800" />
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm text-gray-600 mb-1">Device Model ID</label>
+                                <input type="text" value="0" class="w-full p-3 rounded-lg border border-gray-200 bg-white text-gray-800" />
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1">Protocol Version</label>
+                                <input type="text" value="0" class="w-full p-3 rounded-lg border border-gray-200 bg-white text-gray-800" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 头部信息 -->
+                    <div class="glass-effect rounded-xl mb-4 overflow-hidden bg-gray-100">
+                        <div class="flex justify-between items-center p-3 border-b border-gray-100">
+                            <h2 class="text-base font-semibold text-gray-800">Header Information</h2>
+                            <button class="text-gray-400">
+                                <i class="icon-chevron-up"></i>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="mb-4">
+                                <label class="block text-sm text-gray-600 mb-1">Sequence ID</label>
+                                <input type="text" value="256" class="w-full p-3 rounded-lg border border-gray-200 bg-white text-gray-800" />
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <label class="text-sm text-gray-600">Acknowledgment Flag (ACK)</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm text-gray-600">From Device</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 命令 -->
+                    <div class="glass-effect rounded-xl mb-4 overflow-hidden bg-gray-100">
+                        <div class="flex justify-between items-center p-3 border-b border-gray-100">
+                            <h2 class="text-base font-semibold text-gray-800">Command</h2>
+                            <button class="text-gray-400">
+                                <i class="icon-chevron-up"></i>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="mb-4">
+                                <label class="block text-sm text-gray-600 mb-1">Command</label>
+                                <div class="relative">
+                                    <select class="w-full p-3 rounded-lg border border-gray-200 bg-white text-gray-800 appearance-none">
+                                        <option>0x01 LocationData</option>
+                                    </select>
+                                    <i class="icon-chevron-down absolute right-3 top-3 text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm text-gray-600 mb-1">Key</label>
+                                <div class="relative">
+                                    <select class="w-full p-3 rounded-lg border border-gray-200 bg-white text-gray-800 appearance-none">
+                                        <option>0x01 Device ID</option>
+                                    </select>
+                                    <i class="icon-chevron-down absolute right-3 top-3 text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm text-gray-600 mb-1">Json Data</label>
+                                <textarea class="w-full p-3 rounded-lg border border-gray-200 bg-white text-gray-800 font-mono text-sm h-20">{"deviceId": "123456"}</textarea>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm text-gray-600 mb-1">Hex Data</label>
+                                <input type="text" placeholder="Enter hex data" class="w-full p-3 rounded-lg border border-gray-200 bg-gray-50 font-mono text-sm text-gray-700" />
+                            </div>
+                            <div class="flex gap-2 mb-2">
+                                <button class="flex-1 py-3 bg-green-700 text-white font-medium rounded-lg shadow-sm">Add</button>
+                                <button class="flex-1 py-3 bg-green-700 text-white font-medium rounded-lg shadow-sm">Update</button>
+                            </div>
+                            <button class="w-full py-3 bg-gray-300 text-gray-700 font-medium rounded-lg shadow-sm">Send</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 发送结果 -->
+                    <div class="glass-effect rounded-xl mb-4 overflow-hidden bg-gray-100">
+                        <div class="flex justify-between items-center p-3 border-b border-gray-100">
+                            <h2 class="text-base font-semibold text-gray-800">Send Result</h2>
+                            <button class="text-gray-400">
+                                <i class="icon-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="mb-3">
+                                <label class="block text-sm text-gray-600 mb-1">Sent Data:</label>
+                                <input type="text" readonly class="w-full p-3 rounded-lg border border-gray-200 bg-gray-50 font-mono text-sm text-gray-700" value="FF 01 02 03 04 05 06 07 08" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="block text-sm text-gray-600 mb-1">Received Data:</label>
+                                <input type="text" readonly class="w-full p-3 rounded-lg border border-gray-200 bg-gray-50 font-mono text-sm text-gray-700" value="FF 05 06 07 08 09 0A 0B 0C" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="block text-sm text-gray-600 mb-1">Parse Result:</label>
+                                <div class="p-3 rounded-lg border border-gray-200 bg-white font-mono text-sm text-gray-700 h-36 overflow-auto">
+                                    {"status": "success","data": {"deviceId": "123456","timestamp": 1621234567}}
+                                </div>
+                            </div>
+                            <button class="w-full py-3 bg-green-700 text-white font-medium rounded-lg shadow-sm">Clear</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
